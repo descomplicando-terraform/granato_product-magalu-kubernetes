@@ -1,0 +1,1 @@
+# granato_product-magalu-kubernetes
