@@ -1,5 +1,5 @@
 module "magalu_kubernetes_cluster" {
-  source = "github.com/descomplicando-terraform/granato_module-magalu-kubernetes?ref=v1.0.0"
+  source = "github.com/descomplicando-terraform/granato_module-magalu-kubernetes?ref=v2.0.0"
 
   cluster_name        = "nataliagranato"
   cluster_description = "descrição do seu cluster"
