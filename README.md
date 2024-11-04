@@ -46,17 +46,13 @@ jobs:
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Initialize Terraform
       run: terraform init
 
     - name: Plan Terraform
-      run: terraform plan
+      run: terraform plan -out=tfplan
 
-    - name: Apply Terraform
-      run: terraform apply -auto-approve
 ```
 
 ### Requisitos
