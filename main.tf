@@ -5,7 +5,6 @@ module "magalu_kubernetes_cluster" {
   cluster_description = var.cluster_description
   kubernetes_version  = var.kubernetes_version
   nodepool_name       = var.nodepool_name
-  nodepool_flavor     = var.nodepool_flavor_name
   nodepool_replicas   = var.nodepool_replicas
   timer_duration      = var.timer_duration
 
