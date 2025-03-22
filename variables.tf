@@ -39,9 +39,3 @@ variable "enabled_server_group" {
   type        = bool
   default     = false
 }
-
-variable "region" {
-  description = "Região para o cluster Kubernetes"
-  type        = string
-  default     = "br-se1"
-}
