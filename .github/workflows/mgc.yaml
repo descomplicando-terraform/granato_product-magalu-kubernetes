@@ -46,11 +46,10 @@ jobs:
       # Executar o Terraform Plan e salvar nos artefatos
       - name: Terraform Plan
         run: terraform plan -out=tfplan
-        continue-on-error: false
 
       # Salvar o arquivo de plano como artefato
       - name: Save Terraform Plan as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: terraform-plan
           path: tfplan
