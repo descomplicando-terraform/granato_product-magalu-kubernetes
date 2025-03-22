@@ -7,5 +7,6 @@ module "magalu_kubernetes_cluster" {
   nodepool_name        = var.nodepool_name
   nodepool_replicas    = var.nodepool_replicas
   enabled_server_group = var.enabled_server_group
+  region               = var.region
 
 }
