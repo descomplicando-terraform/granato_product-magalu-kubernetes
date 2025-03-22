@@ -8,4 +8,5 @@ terraform {
       source  = "hashicorp/local"
       version = "~> 2.5.0" # Permite atualizações dentro da versão 2.5.x
     }
+  }
 }
