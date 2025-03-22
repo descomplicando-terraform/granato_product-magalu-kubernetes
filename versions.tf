@@ -10,13 +10,13 @@ terraform {
     }
   }
   backend "s3" {
-    bucket                      = "granato-tf"
-    key                         = "kubernetes/terraform.tfstate"
-    region                      = "br-se1"
-    skip_region_validation      = true
-    skip_credentials_validation = true
-    skip_requesting_account_id  = true
-    skip_s3_checksum            = true
+    bucket = "granato-tf"
+    key    = "kubernetes/terraform.tfstate"
+    region = "br-se1"
+    #    skip_region_validation      = true
+    #    skip_credentials_validation = true
+    #    skip_requesting_account_id  = true
+    #    skip_s3_checksum            = true
     endpoints = {
       s3 = "https://br-se1.magaluobjects.com/granato-tf"
     }
