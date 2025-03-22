@@ -1,0 +1,60 @@
+name: MGC Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout do código
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Baixar e instalar o mgccli
+      - name: Download and install mgccli
+        run: |
+          wget https://github.com/MagaluCloud/magalu/releases/download/v0.31.0/mgccli_0.31.0_linux_amd64.deb
+          sudo dpkg -i mgccli_0.31.0_linux_amd64.deb
+
+      # Exportar variáveis de ambiente a partir dos secrets
+      - name: Export environment variables
+        env:
+          MGC_API_KEY: ${{ secrets.MGC_API_KEY }}
+          MGC_OBJ_KEY_ID: ${{ secrets.MGC_OBJ_KEY_ID }}
+          MGC_OBJ_KEY_SECRET: ${{ secrets.MGC_OBJ_KEY_SECRET }}
+          MGC_REGION: ${{ secrets.MGC_REGION }}
+        run: |
+          echo "MGC_API_KEY=${MGC_API_KEY}" >> $GITHUB_ENV
+          echo "MGC_OBJ_KEY_ID=${MGC_OBJ_KEY_ID}" >> $GITHUB_ENV
+          echo "MGC_OBJ_KEY_SECRET=${MGC_OBJ_KEY_SECRET}" >> $GITHUB_ENV
+          echo "MGC_REGION=${MGC_REGION}" >> $GITHUB_ENV
+
+      # Instalar o Terraform
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.6
+
+      # Inicializar o Terraform
+      - name: Terraform Init
+        run: terraform init
+
+      # Executar o Terraform Plan e salvar nos artefatos
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        continue-on-error: false
+
+      # Salvar o arquivo de plano como artefato
+      - name: Save Terraform Plan as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: terraform-plan
+          path: tfplan
+
+      # Aplicar o Terraform com auto aprovação
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
