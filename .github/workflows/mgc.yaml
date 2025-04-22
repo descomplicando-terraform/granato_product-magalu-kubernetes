@@ -41,7 +41,7 @@ jobs:
 
       # Inicializar o Terraform
       - name: Terraform Init
-        run: terraform init
+        run: terraform init --upgrade
 
       # Executar o Terraform Plan e imprimir no log
       - name: Terraform Plan
