@@ -2,7 +2,7 @@ terraform {
   required_providers {
     mgc = {
       source  = "magalucloud/mgc"
-      version = "~> 0.27.0" # Permite atualizações dentro da versão 0.27.x
+      version = "~> 0.32.2" # Permite atualizações dentro da versão 0.27.x
     }
     local = {
       source  = "hashicorp/local"
